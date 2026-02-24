@@ -1,0 +1,26 @@
+# APMTS v2 — Python dependencies
+# Install with: pip install -r requirements.txt
+
+# ── HTTP & auth ────────────────────────────────────────────────────────────────
+requests==2.32.3
+python-dotenv==1.0.1
+
+# ── Data & math ───────────────────────────────────────────────────────────────
+numpy==1.26.4
+
+# ── Config ────────────────────────────────────────────────────────────────────
+pyyaml==6.0.2
+
+# ── CLI output ────────────────────────────────────────────────────────────────
+rich==13.7.1
+
+# ── Desktop dashboard ─────────────────────────────────────────────────────────
+customtkinter==5.2.2
+
+# ── Polymarket CLOB integration ───────────────────────────────────────────────
+# py-clob-client provides:
+#   - Credential derivation from private key (create_or_derive_api_creds)
+#   - EIP-712 order signing
+#   - Official Polymarket endpoint wrappers
+# Docs: https://github.com/Polymarket/py-clob-client
+py-clob-client>=0.17.0

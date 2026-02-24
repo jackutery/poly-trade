@@ -1,0 +1,77 @@
+# ================================================================
+# APMTS — Aggressive Polymarket Trading System
+# Configuration File v2
+# ================================================================
+
+# ── General ──────────────────────────────────────────────────────
+environment:    production   # production | testnet
+base_currency:  USD
+
+# ── Tracked assets ───────────────────────────────────────────────
+# Only markets whose title contains one of these tokens (word-
+# boundary match) will be considered for trading.
+assets:
+  - BTC
+  - ETH
+  - SOL
+  - XRP
+
+# ── Risk management ──────────────────────────────────────────────
+risk:
+  # Maximum USD size for a single order
+  max_usd_per_trade: 50
+
+  # Minimum USD size — orders below this are skipped
+  min_usd_per_trade: 2
+
+  # Daily loss limit (USD).  Engine stops when daily PnL < -max_daily_loss_usd.
+  # This value is persisted on disk and survives restarts.
+  max_daily_loss_usd: 200
+
+  # Maximum number of simultaneously open positions
+  max_open_positions: 4
+
+  # Per-asset cumulative exposure cap (USD)
+  per_asset_max_exposure_usd:
+    BTC: 100
+    ETH: 100
+    SOL:  75
+    XRP:  75
+
+  # Stop-loss: close position if unrealised loss exceeds this fraction of entry
+  stop_loss_pct: 0.15      # 15%
+
+  # Take-profit: close position if unrealised gain exceeds this fraction
+  take_profit_pct: 0.25    # 25%
+
+# ── Strategy parameters ──────────────────────────────────────────
+strategy:
+  # Minimum directional momentum score required (0–1, > 0.5 is bullish)
+  momentum_threshold: 0.65
+
+  # Minimum order-book imbalance score required (0–1, > 0.5 is bid-heavy)
+  orderbook_imbalance_threshold: 0.60
+
+  # Minimum weighted confidence score to execute a trade
+  min_confidence: 0.70
+
+  # Seconds to wait between signals for the same market
+  cooldown_seconds: 90
+
+# ── Execution ────────────────────────────────────────────────────
+execution:
+  # Maximum acceptable slippage on limit price (fraction)
+  slippage_tolerance: 0.02   # 2%
+
+  # Seconds to sleep between main loop iterations
+  loop_sleep_seconds: 10
+
+  # API retry settings (used by CLOB client)
+  retry_attempts: 3
+  retry_delay_seconds: 2
+
+# ── Logging ──────────────────────────────────────────────────────
+logging:
+  level: INFO          # DEBUG | INFO | WARNING | ERROR
+  to_file: true
+  directory: logs      # relative to project root
